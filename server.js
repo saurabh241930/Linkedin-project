@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT,process.env.IP
+// var port = process.env.PORT || 1000;
 
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -12,10 +12,12 @@ var flash = require('connect-flash');
 var cors = require('cors')
 var path = require('path');
 
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url, {
-	useMongoClient: true,
-});
+// var configDB = require('./config/database.js');
+// mongoose.connect(configDB.url, {
+// 	useMongoClient: true,
+// });
+var url = process.env.DATABASEURL || 'mongodb://localhost/testing'
+    mongoose.connect(url);
 require('./config/passport')(passport);
 
 app.use(cors());
@@ -40,5 +42,13 @@ app.set('view engine', 'ejs');
 
 require('./app/routes.js')(app, passport);
 
-app.listen(port)
-console.log('Server running on port: ' + port);
+// app.listen(port)
+// console.log('Server running on port: ' + port);
+
+// app.listen(3000, function () {
+//   console.log('Server started');
+// });
+
+app.listen(process.env.PORT,process.env.IP, function () {
+  console.log('Server started');
+});
