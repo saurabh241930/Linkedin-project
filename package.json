@@ -1,6 +1,10 @@
 {
     "name": "node",
     "version": "1.0.0",
+    "engines": {
+    "node": "8.11.2",
+    "npm":"6.4.1"
+  },
     "main": "script.js",
     "scripts": {
         "start": "node app.js"
